@@ -97,9 +97,6 @@ module Pod
       Dir.chdir("Context") do
         system "pod install"
       end
-
-      `git add Context/#{pod_name}.xcodeproj/project.pbxproj`
-      `git commit -m "Initial commit"`
     end
 
     def clean_template_files
@@ -163,8 +160,6 @@ module Pod
 
     def reinitialize_git_repo
       `rm -rf .git`
-      `git init`
-      `git add -A`
     end
 
     def validate_user_details
