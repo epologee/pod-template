@@ -12,7 +12,7 @@ module Pod
     end
 
     def perform
-      keep_demo = configurator.ask_with_answers("Would you like to include a demo application with your library", ["Yes", "No"]).to_sym
+      keep_demo = configurator.ask_with_answers("Would you like to include an iOS application with your library", ["Yes", "No"]).to_sym
 
       framework = configurator.ask_with_answers("Which testing frameworks will you use", ["Quick", "None"]).to_sym
       case framework
@@ -29,7 +29,7 @@ module Pod
       case snapshots
         when :yes
           configurator.add_pod_to_podfile "FBSnapshotTestCase"
-          
+
           if keep_demo == :no
               puts " Putting demo application back in, you cannot do view tests without a host application."
               keep_demo = :yes
@@ -49,12 +49,12 @@ module Pod
       }).run
 
       `mv ./templates/swift/* ./`
-      
+
       # There has to be a single file in the Classes dir
       # or a framework won't be created
       `touch Pod/Classes/ReplaceMe.swift`
-      
-      # The Podspec should be 8.0 instead of 7.0      
+
+      # The Podspec should be 8.0 instead of 7.0
       text = File.read("NAME.podspec")
       text.gsub!("7.0", "8.0")
       File.open("NAME.podspec", "w") { |file| file.puts text }
