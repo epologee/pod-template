@@ -12,7 +12,7 @@ module Pod
     end
 
     def perform
-      keep_demo = configurator.ask_with_answers("Would you like to include an iOS application with your library", ["Yes", "No"]).to_sym
+      keep_demo = configurator.ask_with_answers("Would you like to include a 'context' application (for iOS) with your library", ["No", "Yes"]).to_sym
 
       configurator.add_pod_to_podfile "Quick', '~> 0.8"
       configurator.add_pod_to_podfile "Nimble', '~> 3.0"
