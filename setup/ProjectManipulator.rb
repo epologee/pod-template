@@ -63,12 +63,12 @@ module Pod
       project_app_group.remove_from_project
 
       # Remove the product reference
-      product = @project.products.select { |product| product.path == @configurator.pod_name + "_Example.app" }.first
+      product = @project.products.select { |product| product.path == @configurator.pod_name + "_Context.app" }.first
       product.remove_from_project
 
       # Remove the actual folder + files for both projects
-      `rm -rf templates/ios/Example/PROJECT`
-      `rm -rf templates/swift/Example/PROJECT`
+      `rm -rf templates/ios/Context/PROJECT`
+      `rm -rf templates/swift/Context/PROJECT`
 
       # Remove the section in the Podfile for the lib by removing top 3 lines after the source + using_frameworks!
       podfile_path = project_folder + "/Podfile"
@@ -85,7 +85,7 @@ module Pod
     def rename_files
       # shared schemes have project specific names
       scheme_path = project_folder + "/PROJECT.xcodeproj/xcshareddata/xcschemes/"
-      File.rename(scheme_path + "PROJECT.xcscheme", scheme_path +  @configurator.pod_name + "-Example.xcscheme")
+      File.rename(scheme_path + "PROJECT.xcscheme", scheme_path +  @configurator.pod_name + "-Context.xcscheme")
 
       # rename xcproject
       File.rename(project_folder + "/PROJECT.xcodeproj", project_folder + "/" +  @configurator.pod_name + ".xcodeproj")
