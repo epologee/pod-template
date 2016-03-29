@@ -74,7 +74,7 @@ module Pod
 
       replace_variables_in_files
       clean_template_files
-      rename_template_files
+      move_template_files
       add_pods_to_podfile
       customise_prefix
       ensure_carthage_compatibility
@@ -109,7 +109,7 @@ module Pod
     end
 
     def replace_variables_in_files
-      file_names = ['POD_LICENSE', 'POD_README.md', 'NAME.podspec', '.travis.yml', podfile_path]
+      file_names = ['NAME.podspec', '.travis.yml', podfile_path]
       file_names.each do |file_name|
         text = File.read(file_name)
         text.gsub!("${POD_NAME}", @pod_name)
@@ -157,10 +157,8 @@ module Pod
       File.open(tests_path, "w") { |file| file.puts tests }
     end
 
-    def rename_template_files
-      FileUtils.mv "POD_README.md", "README.md"
-      FileUtils.mv "POD_LICENSE", "LICENSE"
-      FileUtils.mv "NAME.podspec", "#{pod_name}.podspec"
+    def move_template_files
+      FileUtils.mv "NAME.podspec", "../#{pod_name}.podspec"
     end
 
     def reinitialize_git_repo
