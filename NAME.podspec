@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     '${POD_NAME}/Pod/**/*.spec.{swift}'
   ]
   s.resource_bundles = {
-    'MinddistrictWith' => ['${POD_NAME}/Pod/*.{png,jpg,plist}']
+    '${POD_NAME}' => ['${POD_NAME}/Pod/*.{png,jpg,plist}']
   }
 
   # s.frameworks = 'UIKit', 'MapKit'
